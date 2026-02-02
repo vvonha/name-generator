@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Random Name Generator - Baby Names, Pet Names, Usernames</title>
+  <meta name="description" content="Free random name generator. Generate baby names, pet names, fantasy names, usernames, and more. Perfect for writers, gamers, and parents.">
+  <meta name="keywords" content="name generator, random name, baby names, pet names, username generator, fantasy names">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8581458440606037" crossorigin="anonymous"></script>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: system-ui, sans-serif; background: #0f0f23; color: #fff; min-height: 100vh; }
+    .container { max-width: 800px; margin: 0 auto; padding: 20px; }
+    h1 { text-align: center; margin: 30px 0; font-size: 2.5rem; background: linear-gradient(90deg, #ff6b6b, #feca57, #48dbfb); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .subtitle { text-align: center; color: #888; margin-bottom: 30px; }
+    .options { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 20px; }
+    .option-btn { padding: 12px 24px; background: #1a1a3e; border: 2px solid #333; border-radius: 25px; color: #fff; cursor: pointer; transition: all 0.3s; }
+    .option-btn:hover, .option-btn.active { background: #ff6b6b; border-color: #ff6b6b; }
+    .generate-btn { display: block; width: 100%; padding: 18px; background: linear-gradient(90deg, #ff6b6b, #feca57); border: none; border-radius: 12px; font-size: 1.2rem; font-weight: bold; color: #000; cursor: pointer; margin: 20px 0; }
+    .generate-btn:hover { transform: scale(1.02); }
+    .result-box { background: #1a1a3e; padding: 40px; border-radius: 16px; text-align: center; margin: 20px 0; }
+    .generated-name { font-size: 3rem; font-weight: bold; margin: 20px 0; background: linear-gradient(90deg, #48dbfb, #ff6b6b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .name-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 20px; }
+    .name-item { background: #252550; padding: 15px; border-radius: 8px; cursor: pointer; transition: background 0.3s; }
+    .name-item:hover { background: #353570; }
+    .ad-space { background: #1a1a3e; padding: 20px; text-align: center; margin: 20px 0; border-radius: 12px; }
+    footer { text-align: center; padding: 30px; color: #666; }
+    a { color: #48dbfb; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>✨ Random Name Generator</h1>
+    <p class="subtitle">Generate unique names for any purpose</p>
+    
+    <div class="options">
+      <button class="option-btn active" data-type="baby">👶 Baby Names</button>
+      <button class="option-btn" data-type="pet">🐕 Pet Names</button>
+      <button class="option-btn" data-type="fantasy">🧙 Fantasy</button>
+      <button class="option-btn" data-type="username">🎮 Username</button>
+      <button class="option-btn" data-type="business">💼 Business</button>
+    </div>
+    
+    <div class="options">
+      <button class="option-btn gender-btn active" data-gender="any">Any</button>
+      <button class="option-btn gender-btn" data-gender="male">♂️ Male</button>
+      <button class="option-btn gender-btn" data-gender="female">♀️ Female</button>
+    </div>
+    
+    <div class="ad-space">
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8581458440606037" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    
+    <button class="generate-btn" onclick="generate()">🎲 Generate Names</button>
+    
+    <div class="result-box">
+      <div class="generated-name" id="mainName">Click Generate!</div>
+      <div class="name-list" id="nameList"></div>
+    </div>
+    
+    <div class="ad-space">
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8581458440606037" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    
+    <footer>
+      <p>Made with ❤️ | <a href="https://vvonha.github.io/crypto-funding-scanner/">More Free Tools</a></p>
+    </footer>
+  </div>
+  
+  <script>
+    const names = {
+      baby: {
+        male: ['Liam', 'Noah', 'Oliver', 'James', 'Elijah', 'Lucas', 'Mason', 'Ethan', 'Alexander', 'Sebastian', 'Henry', 'Jack', 'Aiden', 'Owen', 'Samuel', 'Ryan', 'Nathan', 'Caleb', 'Dylan', 'Luke'],
+        female: ['Olivia', 'Emma', 'Charlotte', 'Amelia', 'Sophia', 'Isabella', 'Mia', 'Evelyn', 'Harper', 'Luna', 'Camila', 'Sofia', 'Scarlett', 'Elizabeth', 'Eleanor', 'Chloe', 'Penelope', 'Layla', 'Riley', 'Zoey']
+      },
+      pet: {
+        male: ['Max', 'Charlie', 'Buddy', 'Rocky', 'Bear', 'Duke', 'Tucker', 'Jack', 'Leo', 'Milo', 'Zeus', 'Apollo', 'Simba', 'Bruno', 'Oscar', 'Teddy', 'Finn', 'Thor', 'Jasper', 'Ollie'],
+        female: ['Bella', 'Luna', 'Lucy', 'Daisy', 'Sadie', 'Molly', 'Maggie', 'Sophie', 'Chloe', 'Bailey', 'Stella', 'Penny', 'Zoey', 'Coco', 'Willow', 'Ruby', 'Rosie', 'Gracie', 'Lola', 'Nala']
+      },
+      fantasy: {
+        male: ['Thorin', 'Aragorn', 'Gandalf', 'Draven', 'Zephyr', 'Orion', 'Phoenix', 'Magnus', 'Theron', 'Aldric', 'Kael', 'Darius', 'Raven', 'Storm', 'Blaze', 'Shadow', 'Frost', 'Grimm', 'Vale', 'Axel'],
+        female: ['Aurora', 'Seraphina', 'Lyra', 'Freya', 'Athena', 'Iris', 'Nova', 'Luna', 'Celeste', 'Raven', 'Storm', 'Ember', 'Phoenix', 'Crystal', 'Willow', 'Ivy', 'Sage', 'Aria', 'Selene', 'Astrid']
+      },
+      username: {
+        any: ['ShadowNinja', 'CyberWolf', 'NeonPhoenix', 'PixelStorm', 'GhostRider', 'TurboMax', 'CryptoKing', 'NightHawk', 'StormChaser', 'IceBreaker', 'ThunderBolt', 'DarkMatter', 'StarDust', 'MoonWalker', 'SkyRider', 'FireFox', 'BlueSteel', 'RedDragon', 'GoldEagle', 'SilverBlade']
+      },
+      business: {
+        any: ['Nexus', 'Apex', 'Vertex', 'Zenith', 'Pulse', 'Spark', 'Nova', 'Echo', 'Flux', 'Prime', 'Core', 'Edge', 'Peak', 'Flow', 'Wave', 'Sync', 'Link', 'Node', 'Hub', 'Base']
+      }
+    };
+    
+    let currentType = 'baby';
+    let currentGender = 'any';
+    
+    document.querySelectorAll('.option-btn:not(.gender-btn)').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.option-btn:not(.gender-btn)').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        currentType = this.dataset.type;
+      });
+    });
+    
+    document.querySelectorAll('.gender-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.gender-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        currentGender = this.dataset.gender;
+      });
+    });
+    
+    function getRandomNames(count) {
+      let pool = [];
+      const typeData = names[currentType];
+      
+      if (typeData.any) {
+        pool = typeData.any;
+      } else if (currentGender === 'any') {
+        pool = [...(typeData.male || []), ...(typeData.female || [])];
+      } else {
+        pool = typeData[currentGender] || [];
+      }
+      
+      const shuffled = [...pool].sort(() => Math.random() - 0.5);
+      return shuffled.slice(0, count);
+    }
+    
+    function generate() {
+      const results = getRandomNames(9);
+      document.getElementById('mainName').textContent = results[0] || 'No names found';
+      
+      const listHtml = results.slice(1).map(name => 
+        `<div class="name-item" onclick="copyName('${name}')">${name}</div>`
+      ).join('');
+      document.getElementById('nameList').innerHTML = listHtml;
+    }
+    
+    function copyName(name) {
+      navigator.clipboard.writeText(name);
+      document.getElementById('mainName').textContent = name;
+    }
+    
+    generate();
+  </script>
+</body>
+</html>
